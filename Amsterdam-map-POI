@@ -1,0 +1,38 @@
+import pandas as pd
+import folium
+from geopy.geocoders import Nominatim # convert an address into latitude and longitude values
+import numpy as np
+import matplotlib.cm as cm
+import matplotlib.colors as colors
+
+os.getcwd()
+data = pd.read_excel('poi.xlsx')
+data.head()
+
+
+#genearte map
+import folium
+from geopy.geocoders import Nominatim # convert an address into latitude and longitude values
+
+address = ' Amsterdam, North Holland, Netherlands'
+geolocator = Nominatim(user_agent="http")
+location = geolocator.geocode(address)
+latitude = location.latitude
+longitude = location.longitude
+map_amsterdam = folium.Map(location=[latitude, longitude], zoom_start=13)
+#map_amsterdam
+
+for lat, lng,i in zip(data['Latitude'], data['Longitude'],range(data.shape[0])):
+  df_details = pd.DataFrame(data.iloc[i,0:21])
+  details = df_details.to_html()
+  html = f"<p>Details: <p/>\
+       {details} <p/> "
+  iframe = folium.IFrame(html,width=400,height=700)
+  label = folium.Popup(iframe,max_width=500,parse_html=True)
+  folium.Marker(
+      [lat,lng],
+      popup= label).add_to(map_amsterdam)
+      
+map_amsterdam
+
+map_amsterdam.save("MapOutput.html")
