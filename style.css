@@ -1,0 +1,22 @@
+/* Set the size of the div element that contains the map */
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+
+body {
+    color: #5bc0dee;
+}
+
+.jumbotron{
+    background-color: transparent;
+    margin: 0;
+    padding: 10px;
+}
+
+.jumbotron h3{
+    font-size: 1cm;
+    font-weight: bold;
+}
